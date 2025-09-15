@@ -1,0 +1,303 @@
+/*Elimina los espacios por defecto*/
+body, h1, h2, p, ul {
+  margin: 0;
+  padding: 0;
+}
+/*Define la tipografia y la separacion entre las lineas*/
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+/*Color de fondo, texto*/
+header {
+  background: #000;
+  color: #fff;
+  padding: 1em 2em;
+  position: sticky;
+  top: 0;
+}
+/*Organiza el logo y el menu*/
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/*El Menú horizontal con espacios*/
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5em;
+}
+/*Estilos para el Menú*/
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+/*Imagen Principal*/
+.hero {
+  background: url("imagenes/Fondo_Home.jpg") no-repeat center center/cover;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+/*Ajusta la Opacidad de la pagina (Overlay)*/
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* ajusta la opacidad */
+}
+/* Para que el texto quede sobre el overlay (opacidad)*/
+.hero-text {
+  position: relative;
+  z-index: 1; 
+}
+/*Ajusta el Tamaño de Nueva Colección 2025*/
+.hero-text h1 {
+  font-size: 3em;
+}
+/*Estilo del Boton ver producto de Home*/
+.btn {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 10px 20px;
+  background: #c97c7c;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Centra el texto*/
+.productos {
+  padding: 2em;
+  text-align: center;
+}
+/*La fila del Grid (Indice de organizacion)*/
+.grid {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin-top: 1em;
+}
+/*Para separar y dar borde y espacio*/
+.producto {
+  border: 1px solid #ddd;
+  padding: 1em;
+  width: 200px;
+}
+/*Evita que la imagen se desforme*/
+.producto img {
+  max-width: 100%;
+}
+
+/*Estilo de el Logo*/
+.logo {
+  font-family: 'Georgia', serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #c97c7c;
+  text-transform: uppercase;
+}
+
+/* === FORMULARIOS === */
+.form-container {
+  max-width: 400px;
+  margin: 3em auto;
+  padding: 2em;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fdfdfd;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 1em;
+  color: #c97c7c; 
+}
+
+form label {
+  display: block;
+  margin-top: 1em;
+  font-weight: bold;
+  color: #333;
+}
+
+form input {
+  width: 100%;
+  padding: 0.7em;
+  margin-top: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #c97c7c; /* resalta en color marca */
+  box-shadow: 0 0 5px rgba(201,124,124,0.5);
+}
+
+/*Boton de registro*/
+
+form button {
+  margin-top: 1.5em;
+  width: 100%;
+  padding: 0.8em;
+  background: #000000; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #c97c7c; /* marca al pasar mouse */
+}
+
+#mensaje {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* === FOOTER === */
+footer {
+  background: #000;
+  color: #fff;
+  padding: 3em 2em 3em;
+  margin-top: 3em;
+}
+
+/* Grid de 4 columnas centradas */
+.footer-container {
+  background: #000;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  column-gap: 3em;
+  row-gap: 2em;
+  max-width: 1100px;
+  margin: 0 auto; /* centra todo */
+  align-items: start;
+}
+
+.footer-section h2.logo {
+  font-family: 'Impact', 'Oswald', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #c97c7c;
+  margin-bottom: 0.5em;
+}
+
+.footer-section h3 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 1em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+  font-size: 13px;
+  color: #ccc;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.footer-section a:hover {
+  color: #c97c7c;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin: 0.5em 0;
+}
+
+/* Redes sociales en texto */
+footer .social {
+  margin-top: 1em;
+}
+
+footer .social a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 13px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+footer .social a:hover {
+  color: #c97c7c;
+}
+
+/* === Formulario suscripción === */
+.footer-section form {
+  display: grid;
+  grid-template-columns: 1fr auto; /* input ocupa todo, botón a la derecha */
+  margin-top: 1em;
+  width: 100%;
+  
+}
+
+.footer-section form input {
+  min-width: 0;     
+  width: 100%;      
+  padding: 0.8em;
+  border: 1px solid #c97c7c;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 3px 0 0 3px;
+  box-sizing: border-box;
+}
+
+.footer-section form input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.footer-section form button {
+  padding: 0.9em 1.5em;
+  background: #c97c7c;
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 3px 3px 0;
+  transition: background 0.3s;
+}
+
+.footer-section form button:hover {
+  background: #a85f5f;
+}
+.copy {
+  text-align: center;
+  margin-top: 2em;
+  font-size: 12px;
+  color: #ffffff;
+  border-top: 1px solid #c97c7c;
+  padding-top: 1em;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html, body {
+  overflow-x: hidden;    
+}
