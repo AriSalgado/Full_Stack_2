@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Lutiane</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">LUTIANE</div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contactos.html">Contactos</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+                 <li>
+                    <a href="carrito.html">
+                        Carrito <span id="contador-carrito">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contacto-page">
+        <h1>Contáctanos</h1>
+        <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+
+        <section class="form-container">
+            <form id="contactForm" action="submit_form.php" method="post">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Número de teléfono</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">¿En qué podemos ayudarte?</label>
+                    <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 class="logo">LUTIANE</h2>
+                <p>Av. Independencia #1234, Santiago</p>
+                <p><a href="mailto:contacto@lutiane.cl">contacto@lutiane.cl</a></p>
+                <div class="social">
+                    <a href="#">Instagram</a> | 
+                    <a href="#">TikTok</a> | 
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>PRODUCTOS</h3>
+                <ul>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Novedades</a></li>
+                    <li><a href="#">Los más vendidos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>NUESTRA TIENDA</h3>
+                <ul>
+                    <li><a href="#">Envíos</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Cambios y devoluciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>RECIBE NUESTRAS OFERTAS</h3>
+                <p>Ingresa tu correo para recibir nuestras novedades y descuentos directos.</p>
+                <form id="suscripcionForm">
+                    <input type="email" placeholder="Tu dirección de correo electrónico" required>
+                    <button type="submit">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+        <div class="copy">
+            <p>&copy; 2025 <strong>Lutiane</strong> - Diseñado con estilo para ti</p>
+        </div>
+    </footer>
+</body>
+</html>
