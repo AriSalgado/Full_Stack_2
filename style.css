@@ -1,5 +1,7 @@
 /* ================================
    RESETEO Y ESTILOS BASE
+   - Elimina márgenes y rellenos por defecto de los navegadores.
+   - Define estilos globales como la tipografía, color de fondo y texto.
 ================================== */
 body, h1, h2, p, ul, figure {
     margin: 0;
@@ -16,6 +18,8 @@ body {
 
 /* ================================
    HEADER Y NAVEGACIÓN
+   - Estilos para la barra de navegación superior, el logo y los enlaces.
+   - La deja fija en la parte superior al hacer scroll.
 ================================== */
 header {
     background: #000;
@@ -82,6 +86,8 @@ nav a:hover {
 
 /* ================================
    HERO (HOME)
+   - Define la gran imagen de bienvenida en la página de inicio.
+   - Incluye una capa semitransparente para mejorar la legibilidad del texto.
 ================================== */
 .hero {
     background: url("imagenes/Fondo_Home.jpg") no-repeat center center/cover;
@@ -130,6 +136,8 @@ nav a:hover {
 
 /* ================================
    PRODUCTOS DESTACADOS (HOME)
+   - Estilos para la sección de productos que se muestra en la página de inicio.
+   - Organiza los productos en una fila.
 ================================== */
 .productos {
     padding: 2em;
@@ -155,6 +163,8 @@ nav a:hover {
 
 /* ================================
    GALERÍA DE PRODUCTOS
+   - Estilos para la página de "Productos".
+   - Crea una cuadrícula adaptable para mostrar todos los productos.
 ================================== */
 .productos-galeria-container {
     max-width: 1200px;
@@ -168,8 +178,9 @@ nav a:hover {
     color: #333;
 }
 .productos-galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra los productos horizontalmente */
     gap: 2em;
 }
 .producto-item {
@@ -210,21 +221,32 @@ nav a:hover {
     color: #c97c7c;
     margin-bottom: 1em;
 }
-.producto-item button {
+
+/* Estilo genérico para el botón de "Añadir al carrito" */
+.add-to-cart-btn {
     background-color: #000;
     color: #fff;
     border: none;
     padding: 0.8em 1.5em;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px; /* Aseguramos un tamaño de fuente consistente */
     transition: background 0.3s;
 }
-.producto-item button:hover {
+
+.add-to-cart-btn:hover {
     background-color: #c97c7c;
 }
+.btn-detalle {
+    margin-bottom: 1em; /* Añade espacio entre el botón de detalle y el de añadir al carrito */
+    background-color: #555;
+}
+.btn-detalle:hover { background-color: #333; }
 
 /* ================================
    FORMULARIOS (Login y Registro)
+   - Estilos unificados para los formularios de login, registro y contacto.
+   - Define el aspecto de la caja del formulario, campos de texto y botones.
 ================================== */
 .form-container {
     max-width: 400px;
@@ -283,6 +305,8 @@ form button:hover {
 
 /* ================================
    FOOTER
+   - Estilos para el pie de página.
+   - Lo organiza en columnas adaptables (logo, enlaces, suscripción).
 ================================== */
 footer {
     background: #000;
@@ -385,7 +409,11 @@ footer .social a:hover {
     margin-right: auto;
 }
 
-/* === SECCIÓN NOSOTROS === */
+/* ================================
+   SECCIÓN NOSOTROS
+   - Estilos específicos para la página "Nosotros".
+   - Define el contenedor principal y las tarjetas de "Misión y Valores".
+================================== */
 .nosotros-container {
   max-width: 1000px;
   margin: 3em auto;
@@ -447,6 +475,8 @@ footer .social a:hover {
 
 /* ================================
    CARRITO DE COMPRAS
+   - Estilos para la página del carrito.
+   - Define la apariencia de cada producto, los botones y el resumen de compra.
 ================================== */
 .carrito-page {
     max-width: 900px;
@@ -573,4 +603,89 @@ footer .social a:hover {
 
 .resumen-compra #btn-comprar:hover {
     background-color: #27ae60;
+}
+
+/* ================================
+   PÁGINA DE BLOG
+   - Estilos para la página del blog y las tarjetas de cada artículo.
+================================== */
+.container { /* Contenedor genérico usado en blog.html */
+    max-width: 1100px;
+    margin: 3em auto;
+    padding: 2em;
+    text-align: center;
+}
+
+.container h1 {
+    margin-bottom: 1em;
+    color: #333;
+}
+
+.blog-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 1.5em;
+    text-align: left; /* Alineamos el texto a la izquierda para mejor lectura */
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.blog-card img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.blog-card h4 {
+    font-size: 1.3em;
+    color: #333;
+}
+
+/* ================================
+   PÁGINA DETALLE DE PRODUCTO
+   - Estilos para la tarjeta que muestra un producto en detalle.
+================================== */
+.detalle-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas: imagen y texto */
+    gap: 2em;
+    padding: 2em;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto; /* Centra la tarjeta */
+}
+
+.detalle-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.detalle-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.detalle-info h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+.detalle-info p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.detalle-info .add-to-cart-btn, .detalle-info .btn {
+    align-self: flex-start; /* Alinea los botones a la izquierda */
 }

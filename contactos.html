@@ -15,6 +15,7 @@
                 <li><a href ="index.html">Inicio</a></li>
                 <li><a href ="productos.html">Productos</a></li>
                 <li><a href ="contactos.html">Contactos</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href ="nosotros.html">Nosotros</a></li>
                 <li><a href ="login.html">Login</a></li>
                 <li><a href ="registro.html">Registro</a></li>
@@ -28,26 +29,20 @@
         <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
 
         <section class="form-container">
-            <form id="contactForm" action="submit_form.php" method="post">
-                <div class="form-group">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Número de teléfono</label>
-                    <input type="tel" id="telefono" name="telefono">
-                </div>
-                <div class="form-group">
-                    <label for="mensaje">¿En qué podemos ayudarte?</label>
-                    <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            <form id="formContacto">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" required>
+
+                <label for="mensajeContacto">Mensaje:</label>
+                <textarea id="mensajeContacto" required></textarea>
+
+                <button type="submit">Enviar</button>
             </form>
-        </section>
+            <p id="alerta"></p>
+        </section>  
     </main>
 
     <footer>
