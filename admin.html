@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administrador - Lutiane</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">ADMIN - LUTIANE</div>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Tienda</a></li>
+        <li><a href="admin.html">Panel Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="admin-container">
+    <h1>Panel de Administración</h1>
+
+    <!-- Gestión de productos -->
+    <section>
+      <h2>Gestión de Productos</h2>
+      <form id="formProducto">
+        <input type="text" id="nombreProd" placeholder="Nombre producto" required>
+        <input type="number" id="precioProd" placeholder="Precio" required>
+        <input type="number" id="stockProd" placeholder="Stock" required>
+        <button type="submit">Agregar Producto</button>
+      </form>
+      <div id="listaProductosAdmin"></div>
+    </section>
+
+    <section>
+      <h2>Gestión de Usuarios</h2>
+      <form id="formUsuario">
+        <input type="text" id="nombreUsuario" placeholder="Nombre" required>
+        <select id="rolUsuario">
+          <option value="admin">Administrador</option>
+          <option value="vendedor">Vendedor</option>
+          <option value="cliente">Cliente</option>
+        </select>
+        <button type="submit">Crear Usuario</button>
+      </form>
+      <div id="listaUsuariosAdmin"></div>
+    </section>
+  </main>
+</body>
+</html>

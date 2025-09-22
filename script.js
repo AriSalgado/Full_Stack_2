@@ -1,41 +1,4 @@
 // =========================
-// VALIDACIÓN LOGIN
-// =========================
-const formLogin = document.getElementById("formLogin");
-if (formLogin) {
-  formLogin.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const correo = document.getElementById("correo").value.trim();
-    const password = document.getElementById("password").value;
-    const mensaje = document.getElementById("mensaje");
-
-    const regexCorreo = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.cl)$/;
-
-    if (correo === "" || password === "") {
-      mensaje.textContent = "Todos los campos son obligatorios.";
-      mensaje.style.color = "red";
-      return;
-    }
-
-    if (!regexCorreo.test(correo)) {
-      mensaje.textContent = "Solo se permiten correos @gmail.cl o @gmail.com.";
-      mensaje.style.color = "red";
-      return;
-    }
-
-    if (password.length < 4 || password.length > 10) {
-      mensaje.textContent = "La contraseña debe tener entre 4 y 10 caracteres.";
-      mensaje.style.color = "red";
-      return;
-    }
-
-    mensaje.textContent = "Inicio de sesión exitoso.";
-    mensaje.style.color = "green";
-  });
-}
-
-// =========================
 // VALIDACIÓN REGISTRO
 // =========================
 const formRegistro = document.getElementById("formRegistro");
@@ -382,13 +345,17 @@ const productosData = {
         nombre: "Polera Oversize",
         descripcion: "Una polera cómoda y con estilo, perfecta para un look urbano y relajado. Hecha con algodón de alta calidad.",
         precio: 15000,
-        imagen: "imagenes/polera.png"
+        imagen: "imagenes/polera.png",
+        stock: 5,
+        stockCritico: 2
     },
     2: {
         nombre: "Pantalón Cargo",
         descripcion: "Pantalón cargo resistente y funcional, con múltiples bolsillos para mayor comodidad. Ideal para el día a día.",
         precio: 25000,
-        imagen: "imagenes/Cargo_Jeans.jpg"
+        imagen: "imagenes/Cargo_Jeans.jpg",
+        stock: 10,
+        stockCritico: 3
     },
 };
 
@@ -418,8 +385,174 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+
+      // Mostrar alerta de stock crítico
+      if (p.stock <= p.stockCritico) {
+        detalleProducto.innerHTML += `<p style="color:red">⚠ Stock crítico: quedan ${p.stock} unidades</p>`;
+      }
+
     } else {
       detalleProducto.innerHTML = "<p>Producto no encontrado.</p>";
     }
+  }
+});
+
+
+// =========================
+// ADMIN: GESTIÓN DE PRODUCTOS
+// =========================
+const formProducto = document.getElementById("formProducto");
+const listaProductosAdmin = document.getElementById("listaProductosAdmin");
+
+if (formProducto && listaProductosAdmin) {
+  formProducto.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById("nombreProd").value.trim();
+    const precio = parseFloat(document.getElementById("precioProd").value);
+    const stock = parseInt(document.getElementById("stockProd").value);
+
+    let productos = JSON.parse(localStorage.getItem("adminProductos")) || [];
+    productos.push({ id: Date.now(), nombre, precio, stock });
+    localStorage.setItem("adminProductos", JSON.stringify(productos));
+
+    mostrarProductosAdmin();
+    formProducto.reset();
+  });
+
+  function mostrarProductosAdmin() {
+    let productos = JSON.parse(localStorage.getItem("adminProductos")) || [];
+    listaProductosAdmin.innerHTML = productos.map(p => `
+      <div>
+        <strong>${p.nombre}</strong> - $${p.precio} (Stock: ${p.stock})
+        <button onclick="eliminarProducto(${p.id})">Eliminar</button>
+      </div>
+    `).join("");
+  }
+
+  window.eliminarProducto = function(id) {
+    let productos = JSON.parse(localStorage.getItem("adminProductos")) || [];
+    productos = productos.filter(p => p.id !== id);
+    localStorage.setItem("adminProductos", JSON.stringify(productos));
+    mostrarProductosAdmin();
+  };
+
+  mostrarProductosAdmin();
+}
+
+// =========================
+// ADMIN: GESTIÓN DE USUARIOS
+// =========================
+const formUsuario = document.getElementById("formUsuario");
+const listaUsuariosAdmin = document.getElementById("listaUsuariosAdmin");
+
+if (formUsuario && listaUsuariosAdmin) {
+  formUsuario.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById("nombreUsuario").value.trim();
+    const rol = document.getElementById("rolUsuario").value;
+
+    let usuarios = JSON.parse(localStorage.getItem("adminUsuarios")) || [];
+    usuarios.push({ id: Date.now(), nombre, rol });
+    localStorage.setItem("adminUsuarios", JSON.stringify(usuarios));
+
+    mostrarUsuariosAdmin();
+    formUsuario.reset();
+  });
+
+  function mostrarUsuariosAdmin() {
+    let usuarios = JSON.parse(localStorage.getItem("adminUsuarios")) || [];
+    listaUsuariosAdmin.innerHTML = usuarios.map(u => `
+      <div>
+        ${u.nombre} (${u.rol})
+        <button onclick="eliminarUsuario(${u.id})">Eliminar</button>
+      </div>
+    `).join("");
+  }
+
+  window.eliminarUsuario = function(id) {
+    let usuarios = JSON.parse(localStorage.getItem("adminUsuarios")) || [];
+    usuarios = usuarios.filter(u => u.id !== id);
+    localStorage.setItem("adminUsuarios", JSON.stringify(usuarios));
+    mostrarUsuariosAdmin();
+  };
+
+  mostrarUsuariosAdmin();
+}
+
+// =========================
+// VENDEDOR: LISTAR PRODUCTOS Y ÓRDENES
+// =========================
+const listaProductosVendedor = document.getElementById("listaProductosVendedor");
+if (listaProductosVendedor) {
+  let productos = JSON.parse(localStorage.getItem("adminProductos")) || [];
+  listaProductosVendedor.innerHTML = productos.map(p => `
+    <div>
+      <strong>${p.nombre}</strong> - $${p.precio} (Stock: ${p.stock})
+    </div>
+  `).join("");
+}
+
+const listaOrdenesVendedor = document.getElementById("listaOrdenesVendedor");
+if (listaOrdenesVendedor) {
+  let ordenes = JSON.parse(localStorage.getItem("ordenesClientes")) || [];
+  listaOrdenesVendedor.innerHTML = ordenes.length > 0 ? ordenes.map(o => `
+    <div>Orden #${o.id} - Cliente: ${o.cliente}, Total: $${o.total}</div>
+  `).join("") : "<p>No hay órdenes registradas.</p>";
+}
+
+// =========================
+// LOGIN CON ROLES
+// =========================
+const formLogin = document.getElementById("formLogin");
+if (formLogin) {
+  formLogin.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const correo = document.getElementById("correo").value.trim();
+    const password = document.getElementById("password").value;
+    const mensaje = document.getElementById("mensaje");
+
+    if (correo === "" || password === "") {
+      mensaje.textContent = "Todos los campos son obligatorios.";
+      mensaje.style.color = "red";
+      return;
+    }
+
+    if (correo === "admin@lutiane.cl" && password === "admin123") {
+      localStorage.setItem("rolUsuario", "admin");
+      mensaje.textContent = "Inicio de sesión como Administrador.";
+      mensaje.style.color = "green";
+      window.location.href = "admin.html";
+    } else if (correo === "vendedor@duoc.cl" && password === "vendedor123") {
+      localStorage.setItem("rolUsuario", "vendedor");
+      mensaje.textContent = "Inicio de sesión como Vendedor.";
+      mensaje.style.color = "green";
+      window.location.href = "vendedor.html";
+    } else {
+      localStorage.setItem("rolUsuario", "cliente");
+      mensaje.textContent = "Inicio de sesión como Cliente.";
+      mensaje.style.color = "green";
+      window.location.href = "index.html";
+    }
+  });
+}
+
+// =========================
+// PROTECCIÓN DE PÁGINAS
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const rol = localStorage.getItem("rolUsuario");
+  const path = window.location.pathname;
+
+  // Si estoy en admin.html y no soy admin
+  if (path.includes("admin.html") && rol !== "admin") {
+    alert("Acceso denegado. Solo administradores.");
+    window.location.href = "index.html";
+  }
+
+  // Si estoy en vendedor.html y no soy vendedor
+  if (path.includes("vendedor.html") && rol !== "vendedor") {
+    alert("Acceso denegado. Solo vendedores.");
+    window.location.href = "index.html";
   }
 });
