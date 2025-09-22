@@ -424,3 +424,59 @@ footer .social a:hover {
   display: block;
 }
 
+/* ================================
+   ADMIN Y VENDEDOR
+================================== */
+.admin-container, .vendedor-container {
+  max-width: 900px;
+  margin: 3em auto;
+  padding: 2em;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.admin-container h1, .vendedor-container h1 {
+  color: #c97c7c;
+  margin-bottom: 1em;
+}
+.admin-container form, .vendedor-container form {
+  margin-bottom: 1.5em;
+}
+.admin-container input, .vendedor-container input, 
+.admin-container select {
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+.admin-container button, .vendedor-container button {
+  padding: 0.5em 1em;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.admin-container button:hover, .vendedor-container button:hover {
+  background: #c97c7c;
+}
+
+/* ================================
+   RESPONSIVE
+================================== */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  .grid, .productos-galeria {
+    flex-direction: column;
+    align-items: center;
+  }
+  .detalle-card {
+    grid-template-columns: 1fr; /* Imagen arriba, info abajo */
+  }
+  .admin-container, .vendedor-container {
+    padding: 1em;
+  }
+}
