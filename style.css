@@ -59,6 +59,27 @@ nav a:hover {
     text-transform: uppercase;
 }
 
+/* Contador del carrito */
+#contador-carrito {
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0.1em 0.5em;
+    font-size: 0.75rem;
+    font-weight: bold;
+    position: relative;
+    top: -2px;
+    margin-left: 4px;
+    line-height: 1.5;
+    min-width: 10px;
+    text-align: center;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+#contador-carrito:empty {
+    transform: scale(0);
+}
+
 /* ================================
    HERO (HOME)
 ================================== */
@@ -147,8 +168,9 @@ nav a:hover {
     color: #333;
 }
 .productos-galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2em;
 }
 .producto-item {
@@ -189,18 +211,26 @@ nav a:hover {
     color: #c97c7c;
     margin-bottom: 1em;
 }
-.producto-item button {
+
+/* Botón de carrito */
+.add-to-cart-btn {
     background-color: #000;
     color: #fff;
     border: none;
     padding: 0.8em 1.5em;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
     transition: background 0.3s;
 }
-.producto-item button:hover {
+.add-to-cart-btn:hover {
     background-color: #c97c7c;
 }
+.btn-detalle {
+    margin-bottom: 1em;
+    background-color: #555;
+}
+.btn-detalle:hover { background-color: #333; }
 
 /* ================================
    FORMULARIOS (Login y Registro)
@@ -317,7 +347,6 @@ footer .social a {
 footer .social a:hover {
     color: #c97c7c;
 }
-/* Formulario de suscripción */
 .footer-section form {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -364,7 +393,9 @@ footer .social a:hover {
     margin-right: auto;
 }
 
-/* === SECCIÓN NOSOTROS === */
+/* ================================
+   SECCIÓN NOSOTROS
+================================== */
 .nosotros-container {
   max-width: 1000px;
   margin: 3em auto;
@@ -374,26 +405,22 @@ footer .social a:hover {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
-
 .nosotros-container h2 {
   color: #c97c7c;
   margin-bottom: 0.5em;
   font-size: 1.8em;
 }
-
 .nosotros-container p {
   color: #333;
   margin-bottom: 2em;
   line-height: 1.6;
 }
-
 .valores-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5em;
   margin-top: 1.5em;
 }
-
 .valor-card {
   background: #fdfdfd;
   padding: 1.5em;
@@ -401,21 +428,17 @@ footer .social a:hover {
   border: 1px solid #eee;
   transition: transform 0.3s;
 }
-
 .valor-card:hover {
   transform: translateY(-5px);
   border-color: #c97c7c;
 }
-
 .valor-card h3 {
   margin-bottom: 0.5em;
   color: #c97c7c;
 }
-
 .nosotros-btn {
   margin-top: 2em;
 }
-
 .nosotros-hero img {
   width: 100%;
   height: 350px;
@@ -458,26 +481,6 @@ footer .social a:hover {
 }
 .admin-container button:hover, .vendedor-container button:hover {
   background: #c97c7c;
-}
-
-/* ================================
-   RESPONSIVE
-================================== */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    gap: 0.5em;
-  }
-  .grid, .productos-galeria {
-    flex-direction: column;
-    align-items: center;
-  }
-  .detalle-card {
-    grid-template-columns: 1fr;
-  }
-  .admin-container, .vendedor-container {
-    padding: 1em;
-  }
 }
 
 /* ================================
@@ -662,15 +665,12 @@ footer .social a:hover {
 }
 
 /* ================================
-   PANEL VENDEDOR: MOSTRAR/OCULTAR SECCIONES
+   PANEL VENDEDOR: MOSTRAR/OCULTAR
 ================================== */
 .oculto {
   display: none;
 }
 
-/* ================================
-   TABLAS DE PEDIDOS (Vendedor)
-================================== */
 table {
   width: 100%;
   border-collapse: collapse; /* evita doble borde */
@@ -704,4 +704,31 @@ th {
 td {
   font-size: 14px;
   color: #333;
+=======
+   RESPONSIVE
+================================== */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .grid, .productos-galeria {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detalle-card {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-container, .vendedor-container, .carrito-page, .nosotros-container {
+    padding: 1em;
+  }
+
+  .producto-item figure {
+    width: 100%;
+    height: auto;
+  }
+
 }
