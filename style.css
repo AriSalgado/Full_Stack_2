@@ -660,3 +660,10 @@ footer .social a:hover {
 .detalle-info .add-to-cart-btn, .detalle-info .btn {
     align-self: flex-start;
 }
+
+/* ================================
+   PANEL VENDEDOR: MOSTRAR/OCULTAR SECCIONES
+================================== */
+.oculto {
+  display: none;
+}
