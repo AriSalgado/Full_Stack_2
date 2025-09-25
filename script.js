@@ -1,5 +1,5 @@
 // =========================
-// VALIDACIÓN LOGIN
+// VALIDACIÓN LOGIN CON ROLES
 // =========================
 // Para correos válidos
 const regexCorreo = /^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.cl|duoc\.cl|profesor\.duoc\.cl)$/;
@@ -19,26 +19,30 @@ if (formLogin) {
       return;
     }
 
-    if (!regexCorreo.test(correo)) {
-    mensaje.textContent = "El correo debe ser @gmail.cl, @gmail.com, @duoc.cl o @profesor.duoc.cl.";
-    mensaje.style.color = "red";
-    return;
+    if (correo === "admin@lutiane.cl" && password === "admin123") {
+      localStorage.setItem("rolUsuario", "admin");
+      mensaje.textContent = "Inicio de sesión como Administrador.";
+      mensaje.style.color = "green";
+      window.location.href = "admin.html";
+    } else if (correo === "vendedor@duoc.cl" && password === "vendedor123") {
+      localStorage.setItem("rolUsuario", "vendedor");
+      mensaje.textContent = "Inicio de sesión como Vendedor.";
+      mensaje.style.color = "green";
+      window.location.href = "vendedor.html";
+    } else {
+      localStorage.setItem("rolUsuario", "cliente");
+      mensaje.textContent = "Inicio de sesión como Cliente.";
+      mensaje.style.color = "green";
+      window.location.href = "index.html";
     }
-
-
-    if (password.length < 4 || password.length > 10) {
-      mensaje.textContent = "La contraseña debe tener entre 4 y 10 caracteres.";
-      mensaje.style.color = "red";
-      return;
-    }
-
-    mensaje.textContent = "Inicio de sesión exitoso.";
-    mensaje.style.color = "green";
   });
 }
 
 // =========================
 // VALIDACIÓN REGISTRO
+// =========================
+// =========================
+// VALIDACIÓN REGISTRO + ROLES
 // =========================
 const formRegistro = document.getElementById("formRegistro");
 if (formRegistro) {
@@ -58,12 +62,10 @@ if (formRegistro) {
     }
 
     if (!regexCorreo.test(correo)) {
-    mensaje.textContent = "El correo debe ser @gmail.cl, @gmail.com, @duoc.cl o @profesor.duoc.cl.";
-    mensaje.style.color = "red";
-    return;
+      mensaje.textContent = "El correo debe ser @gmail.cl, @gmail.com, @duoc.cl o @profesor.duoc.cl.";
+      mensaje.style.color = "red";
+      return;
     }
-
-
 
     if (password.length < 4 || password.length > 10) {
       mensaje.textContent = "La contraseña debe tener entre 4 y 10 caracteres.";
@@ -77,10 +79,28 @@ if (formRegistro) {
       return;
     }
 
-    mensaje.textContent = "Registro exitoso.";
+    let rol = "cliente"; // por defecto
+    if (correo === "admin@lutiane.cl") {
+      rol = "admin";
+    } else if (correo.endsWith("vendedor@lutiane.cl")) {
+      rol = "vendedor";
+    }
+
+    localStorage.setItem("rolUsuario", rol);
+
+    mensaje.textContent = `Registro exitoso como ${rol}.`;
     mensaje.style.color = "green";
+
+    if (rol === "admin") {
+      window.location.href = "admin.html";
+    } else if (rol === "vendedor") {
+      window.location.href = "vendedor.html";
+    } else {
+      window.location.href = "index.html";
+    }
   });
 }
+
 
 // =========================
 // AGREGAR AL CARRITO
@@ -171,6 +191,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// =========================
+// BLOG: DETALLE DE ARTÍCULOS
+// =========================
+const detallesBlog = {
+  1: { // Corresponde al artículo de Pantalones Cargo
+    titulo: "Guía de Estilo: Cómo Combinar Pantalones Cargo",
+    contenido: `
+      <p>Los pantalones cargo han vuelto con fuerza, convirtiéndose en una pieza clave del estilo urbano. Su versatilidad los hace perfectos para cualquier ocasión, si sabes cómo combinarlos.</p>
+      <h4>Look Casual y Cómodo</h4>
+      <p>Para un look de día, combina tus pantalones cargo con una polera básica o una de nuestras <strong>poleras oversize</strong>. Este contraste de siluetas crea un balance perfecto. En los pies, unas zapatillas blancas o negras son una apuesta segura.</p>
+      <h4>Estilo Urbano Atrevido</h4>
+      <p>Si buscas algo más audaz, prueba con un crop top ajustado para resaltar la cintura y jugar con las proporciones. Añade una chaqueta de mezclilla o un cortavientos para completar el outfit. ¡No olvides los accesorios como cadenas o un gorro para darle el toque final!</p>
+    `
+  },
+  2: { // Corresponde al artículo de Poleras Oversize
+    titulo: "El Regreso del Oversize: Comodidad y Estilo",
+    contenido: `
+      <p>La moda oversize no es solo una tendencia, es una declaración de comodidad y estilo. Las poleras holgadas te permiten moverte con libertad sin sacrificar el look.</p>
+      <h4>Cómo llevar la tendencia</h4>
+      <p>El secreto está en el equilibrio. Si llevas una polera oversize, combínala con pantalones más ajustados como unos jeans pitillo o calzas. Si prefieres un look totalmente relajado, nuestros <strong>pantalones cargo</strong> son el complemento ideal.</p>
+      <p>Un truco de estilo es meter una parte de la polera por dentro del pantalón para marcar sutilmente la figura y darle un toque más intencionado a tu look. ¡Experimenta y encuentra tu propia forma de llevarlo!</p>
+    `
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const detalleBlog = document.getElementById("detalleBlog");
+  if (detalleBlog) {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (detallesBlog[id]) {
+      detalleBlog.innerHTML = `
+        <h1>${detallesBlog[id].titulo}</h1>
+        ${detallesBlog[id].contenido}
+        <a href="blog.html" class="btn">← Volver al Blog</a>
+      `;
+    } else {
+      detalleBlog.innerHTML = "<p>Artículo no encontrado.</p>";
+    }
+  }
+});
 
 // =========================
 // ADMIN: GESTIÓN DE PRODUCTOS
@@ -213,7 +274,6 @@ if (formProducto && listaProductosAdmin) {
   mostrarProductosAdmin();
 }
 
-
 // =========================
 // ADMIN: GESTIÓN DE USUARIOS
 // =========================
@@ -254,7 +314,6 @@ if (formUsuario && listaUsuariosAdmin) {
   mostrarUsuariosAdmin();
 }
 
-
 // =========================
 // VENDEDOR: LISTAR PRODUCTOS Y ÓRDENES
 // =========================
@@ -287,11 +346,4 @@ function mostrarSeccion(id) {
   // Muestra solo la sección seleccionada
   document.getElementById(id).classList.remove("oculto");
 }
-function mostrarSeccion(id) {
-  // Oculta todas las secciones dentro del main
-  const secciones = document.querySelectorAll("main section");
-  secciones.forEach(sec => sec.classList.add("oculto"));
 
-  // Muestra solo la sección seleccionada
-  document.getElementById(id).classList.remove("oculto");
-}
