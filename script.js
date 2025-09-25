@@ -275,3 +275,23 @@ if (listaOrdenesVendedor) {
     <div>Orden #${o.id} - Cliente: ${o.cliente}, Total: $${o.total}</div>
   `).join("") : "<p>No hay órdenes registradas.</p>";
 }
+
+// =========================================
+// VENDEDOR: Mostrar segun boton apretado
+// =========================================
+function mostrarSeccion(id) {
+  // Oculta todas las secciones dentro del main
+  const secciones = document.querySelectorAll("main section");
+  secciones.forEach(sec => sec.classList.add("oculto"));
+
+  // Muestra solo la sección seleccionada
+  document.getElementById(id).classList.remove("oculto");
+}
+function mostrarSeccion(id) {
+  // Oculta todas las secciones dentro del main
+  const secciones = document.querySelectorAll("main section");
+  secciones.forEach(sec => sec.classList.add("oculto"));
+
+  // Muestra solo la sección seleccionada
+  document.getElementById(id).classList.remove("oculto");
+}
