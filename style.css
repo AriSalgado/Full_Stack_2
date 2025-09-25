@@ -698,3 +698,61 @@ footer .social a:hover {
     height: auto;
   }
 }
+/* ================================
+   TABLAS DE PEDIDOS (Vendedor)
+================================== */
+table {
+  width: 100%;
+  border-collapse: collapse; /* evita doble borde */
+  margin-top: 1em;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background: #000;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px 15px; /* espacio interno */
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f9f9f9; /* resalta fila al pasar mouse */
+}
+
+th {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 14px;
+  color: #333;
+}
+
+/* ================================
+   BOTONES DEL PANEL VENDEDOR
+================================== */
+.panel-vendedor-btn {
+  background-color: #c97c7c;  
+  color: #fff;                
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.panel-vendedor-btn:hover {
+  background-color: #000000;   /* tono más oscuro al pasar el mouse */
+}
+
