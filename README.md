@@ -12,7 +12,7 @@ y luego fusionaremos los cambios en la rama principal `main`.
 
 
 Presentacion
-https://cdn.discordapp.com/attachments/1358637896713768991/1420577610739617833/Portafolio_de_Modelo_Creativo_Rosa_y_Beige_1.pdf?ex=68d5e77f&is=68d495ff&hm=a3dee7d561f10ac5791ac221b75fa26b1659886f94633d0a2d9b42039caa80a1&
+[Presentacion Experiencia 1.pptx.pdf](https://github.com/user-attachments/files/22527916/Presentacion.Experiencia.1.pptx.pdf)
 
 Informe
-https://cdn.discordapp.com/attachments/1358637896713768991/1419845628657143921/DSY1104_Evaluacion_Parcial_1_-_ERS-Especificacion_de_Requisitos_del_software_1.docx?ex=68d5e0c9&is=68d48f49&hm=ce01eaf8848de60ff0da3175061beb9936bccf581ef7910b97efef303c6f9d10&
+[DSY1104 Evaluación Parcial 1 - ERS.docx](https://github.com/user-attachments/files/22527912/DSY1104.Evaluacion.Parcial.1.-.ERS.docx)
