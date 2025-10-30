@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav
-      className="navbar navbar-dark bg-dark w-100"
+      className="navbar navbar-expand-lg navbar-dark custom-navbar"
       style={{
         padding: "1rem 2rem",
         position: "sticky",

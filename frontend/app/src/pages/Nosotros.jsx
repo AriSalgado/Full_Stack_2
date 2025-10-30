@@ -12,8 +12,8 @@ export default function Nosotros() {
           height: "80vh",
         }}
       >
-        <div className="hero-text bg-dark bg-opacity-50 p-4 rounded">
-          <h1 className="display-5 fw-bold">Conoce Lutiane</h1>
+        <div className="hero-text">
+          <h1 className="display-4 fw-bold text-shadow">Conoce Lutiane</h1>
           <p className="lead">Moda urbana con estilo propio</p>
         </div>
       </section>
@@ -30,29 +30,32 @@ export default function Nosotros() {
         </section>
 
         {/* Misión y Valores */}
-        <section className="nosotros-valores text-center mb-5">
-          <h2 className="mb-4">Misión y Valores</h2>
-          <div className="row justify-content-center">
-            <div className="col-md-3 mb-4">
-              <div className="card p-3 shadow-sm h-100">
-                <h3>Autenticidad</h3>
-                <p>Prendas únicas que reflejan tu personalidad.</p>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card p-3 shadow-sm h-100">
-                <h3>Calidad</h3>
-                <p>Diseños hechos para durar y acompañarte día a día.</p>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card p-3 shadow-sm h-100">
-                <h3>Estilo Moderno</h3>
-                <p>Inspirados en la moda casual moderna.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <section className="nosotros-valores text-center mb-5 py-5">
+  <h2 className="mb-4 fw-bold">Misión y Valores</h2>
+  <div className="row justify-content-center">
+    <div className="col-md-3 mb-4">
+      <div className="valor-card shadow-sm p-4 h-100">
+        <h3>Autenticidad</h3>
+        <p>Prendas únicas que reflejan tu personalidad y confianza.</p>
+      </div>
+    </div>
+
+    <div className="col-md-3 mb-4">
+      <div className="valor-card shadow-sm p-4 h-100">
+        <h3>Calidad</h3>
+        <p>Diseños hechos para durar y acompañarte día a día.</p>
+      </div>
+    </div>
+
+    <div className="col-md-3 mb-4">
+      <div className="valor-card shadow-sm p-4 h-100">
+        <h3>Estilo Moderno</h3>
+        <p>Inspirados en la moda urbana contemporánea y versátil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* Botón a Productos */}
         <div className="text-center">
