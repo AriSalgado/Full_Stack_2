@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer"; 
 
 export default function Home() {
   // Productos destacados
@@ -22,21 +23,22 @@ export default function Home() {
   const [carrito, setCarrito] = useState([]);
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
-    alert(`${producto.nombre} añadido al carrito `);
+    alert(`${producto.nombre} añadido al carrito 🛍️`);
   };
 
   return (
-    <div>
+    <>
       {/* Hero section */}
       <section
-  className="hero d-flex align-items-center justify-content-center text-center text-white"
-  style={{
-    width: "100vw",                // ← hace que ocupe todo el ancho
-    minHeight: "90vh",             // ← un poco más alto, más elegante
-    marginLeft: "calc(50% - 50vw)",// ← truco para quitar el margen lateral de Bootstrap
-    background: "url('/imagenes/Fondo_Home.jpg') no-repeat center center/cover",
-  }}
->
+        className="hero d-flex align-items-center justify-content-center text-center text-white"
+        style={{
+          width: "100vw", // ocupa todo el ancho
+          minHeight: "90vh",
+          marginLeft: "calc(50% - 50vw)", // elimina los márgenes laterales de Bootstrap
+          background:
+            "url('/imagenes/Fondo_Home.jpg') no-repeat center center/cover",
+        }}
+      >
         <div className="hero-text">
           <h1 className="display-4">Nueva Colección 2025</h1>
           <p className="lead">Moda urbana y elegante para todos los estilos</p>
@@ -85,6 +87,9 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </div>
+
+      {/* Footer*/}
+      <Footer />
+    </>
   );
 }

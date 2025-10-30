@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
 
-  // Para obtener el ID del producto desde la URL (ej: /detalle?id=2)
+  // Obtener el ID desde la URL (ejemplo: /detalle?id=2)
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
 
-  // Simulamos datos (luego se reemplaza por datos del backend)
+  // Datos simulados (se reemplazarán con backend más adelante)
   const productosEjemplo = [
     {
       id: 1,
@@ -29,8 +30,8 @@ export default function Detalle() {
     },
   ];
 
+  // Buscar el producto correspondiente al ID
   useEffect(() => {
-    // Buscar el producto según el ID de la URL
     const encontrado = productosEjemplo.find(
       (item) => item.id === parseInt(id)
     );
@@ -39,31 +40,39 @@ export default function Detalle() {
 
   if (!producto) {
     return (
-      <main className="container py-5">
-        <p className="text-center">Cargando producto...</p>
-      </main>
+      <>
+        <main className="container py-5">
+          <p className="text-center">Cargando producto...</p>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   return (
-    <main className="container py-5" id="detalleProducto">
-      <div className="row align-items-center">
-        <div className="col-md-6 text-center">
-          <img
-            src={producto.imagen}
-            alt={producto.nombre}
-            className="img-fluid rounded shadow-sm"
-          />
+    <>
+      <main className="container py-5" id="detalleProducto">
+        <div className="row align-items-center">
+          <div className="col-md-6 text-center">
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              className="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div className="col-md-6">
+            <h2 className="mb-3">{producto.nombre}</h2>
+            <p className="fs-4 text-success mb-3">
+              ${producto.precio.toLocaleString()}
+            </p>
+            <p className="mb-4">{producto.descripcion}</p>
+            <button className="btn btn-dark">Agregar al carrito 🛒</button>
+          </div>
         </div>
-        <div className="col-md-6">
-          <h2 className="mb-3">{producto.nombre}</h2>
-          <p className="fs-4 text-success mb-3">
-            ${producto.precio.toLocaleString()}
-          </p>
-          <p className="mb-4">{producto.descripcion}</p>
-          <button className="btn btn-dark">Agregar al carrito 🛒</button>
-        </div>
-      </div>
-    </main>
+      </main>
+
+      {/* Footer*/}
+      <Footer />
+    </>
   );
 }

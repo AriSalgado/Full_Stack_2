@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 export default function Carrito() {
   // --- Estado: lista de productos y total ---
@@ -25,53 +26,58 @@ export default function Carrito() {
   };
 
   return (
-    <main className="carrito-page container py-5">
-      <h1 className="text-center mb-4">Carrito de Compras</h1>
+    <>
+      <main className="carrito-page container py-5">
+        <h1 className="text-center mb-4">Carrito de Compras</h1>
 
-      {/* Lista de productos */}
-      <section className="contenedor-carrito mb-5">
-        {productos.length === 0 ? (
-          <p className="text-center">Tu carrito está vacío 🛒</p>
-        ) : (
-          <div className="row">
-            {productos.map((prod) => (
-              <div
-                key={prod.id}
-                className="col-md-6 mb-3 d-flex align-items-center justify-content-between border p-3 rounded"
-              >
-                <div>
-                  <h5>{prod.nombre}</h5>
-                  <p>
-                    ${prod.precio.toLocaleString()} x {prod.cantidad}
-                  </p>
-                </div>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={() => eliminarProducto(prod.id)}
+        {/* Lista de productos */}
+        <section className="contenedor-carrito mb-5">
+          {productos.length === 0 ? (
+            <p className="text-center">Tu carrito está vacío 🛒</p>
+          ) : (
+            <div className="row">
+              {productos.map((prod) => (
+                <div
+                  key={prod.id}
+                  className="col-md-6 mb-3 d-flex align-items-center justify-content-between border p-3 rounded"
                 >
-                  Eliminar
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+                  <div>
+                    <h5>{prod.nombre}</h5>
+                    <p>
+                      ${prod.precio.toLocaleString()} x {prod.cantidad}
+                    </p>
+                  </div>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => eliminarProducto(prod.id)}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
 
-      {/* Resumen de compra */}
-      <section className="resumen-compra text-center">
-        <p className="fs-5">
-          Total: <strong>${total.toLocaleString()}</strong>
-        </p>
-        {productos.length > 0 && (
-          <button
-            id="btn-comprar"
-            className="btn btn-dark mt-3"
-            onClick={finalizarCompra}
-          >
-            Finalizar Compra
-          </button>
-        )}
-      </section>
-    </main>
+        {/* Resumen de compra */}
+        <section className="resumen-compra text-center">
+          <p className="fs-5">
+            Total: <strong>${total.toLocaleString()}</strong>
+          </p>
+          {productos.length > 0 && (
+            <button
+              id="btn-comprar"
+              className="btn btn-dark mt-3"
+              onClick={finalizarCompra}
+            >
+              Finalizar Compra
+            </button>
+          )}
+        </section>
+      </main>
+
+      {/* Footer  */}
+      <Footer />
+    </>
   );
 }

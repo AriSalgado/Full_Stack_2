@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Nosotros() {
   return (
-    <div>
+    <>
       {/* Hero Section */}
       <section
         className="hero d-flex align-items-center justify-content-center text-white text-center"
@@ -60,6 +61,8 @@ export default function Nosotros() {
           </Link>
         </div>
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }

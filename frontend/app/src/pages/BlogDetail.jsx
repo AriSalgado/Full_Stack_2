@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 
 export default function BlogDetail() {
-  // Estado para guardar el contenido del blog
   const [blog, setBlog] = useState(null);
 
-  // Simulamos la carga del contenido (más adelante se conectará al backend)
   useEffect(() => {
     // Aquí podrías usar fetch() o axios() para traer datos reales del backend
     const ejemploBlog = {
@@ -21,18 +20,23 @@ export default function BlogDetail() {
   }, []);
 
   return (
-    <main className="container py-5" id="detalleBlog">
-      {blog ? (
-        <article className="blog-detail">
-          <h1 className="mb-3">{blog.titulo}</h1>
-          <p className="text-muted">
-            <strong>{blog.autor}</strong> | {blog.fecha}
-          </p>
-          <p className="mt-4">{blog.contenido}</p>
-        </article>
-      ) : (
-        <p>Cargando contenido...</p>
-      )}
-    </main>
+    <>
+      <main className="container py-5" id="detalleBlog">
+        {blog ? (
+          <article className="blog-detail text-start">
+            <h1 className="mb-3">{blog.titulo}</h1>
+            <p className="text-muted">
+              <strong>{blog.autor}</strong> | {blog.fecha}
+            </p>
+            <p className="mt-4">{blog.contenido}</p>
+          </article>
+        ) : (
+          <p>Cargando contenido...</p>
+        )}
+      </main>
+
+      {/* Footer  */}
+      <Footer />
+    </>
   );
 }
