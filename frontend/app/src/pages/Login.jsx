@@ -1,88 +1,62 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer"; 
+import { login } from "../api";
+import Footer from "../components/Footer";
 
 export default function Login() {
-  const [correo, setCorreo] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
-  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validación básica
-    if (!correo || !password) {
-      setMensaje("Por favor completa todos los campos.");
-      return;
-    }
-
-    // Simulación de login (más adelante se conectará al backend)
-    if (correo === "admin@lutiane.cl" && password === "1234") {
-      setMensaje("Bienvenida/o al panel de administración.");
-      setTimeout(() => navigate("/admin"), 1500);
-    } else {
-      setMensaje("Credenciales incorrectas. Intenta nuevamente.");
+    try {
+      const usuario = await login(email, password);
+      setMensaje(`Bienvenido, ${usuario.nombre} (${usuario.rol})`);
+      console.log("Usuario autenticado:", usuario);
+    } catch (error) {
+      setMensaje(error.message);
     }
   };
 
   return (
     <>
-      <main
-        className="form-container container py-5"
-        style={{ maxWidth: "500px" }}
-      >
+      <main className="container py-5">
         <h1 className="text-center mb-4">Iniciar Sesión</h1>
-
         <form
-          id="formLogin"
           onSubmit={handleSubmit}
-          className="d-flex flex-column gap-3"
+          className="mx-auto"
+          style={{ maxWidth: "400px" }}
         >
-          <div>
-            <label htmlFor="correo" className="form-label">
-              Correo:
-            </label>
+          <div className="mb-3">
+            <label className="form-label">Correo</label>
             <input
               type="email"
-              id="correo"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
               className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              maxLength={100}
             />
           </div>
-
-          <div>
-            <label htmlFor="password" className="form-label">
-              Contraseña:
-            </label>
+          <div className="mb-3">
+            <label className="form-label">Contraseña</label>
             <input
               type="password"
-              id="password"
+              className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="form-control"
               required
-              minLength={4}
-              maxLength={10}
             />
           </div>
-
-          <button type="submit" className="btn btn-dark mt-3">
+          <button type="submit" className="btn btn-dark w-100">
             Entrar
           </button>
         </form>
-
         {mensaje && (
-          <p id="mensaje" className="text-center mt-3">
-            {mensaje}
+          <p className="text-center mt-3">
+            <strong>{mensaje}</strong>
           </p>
         )}
       </main>
-
-      {/*  Footer */}
       <Footer />
     </>
   );
