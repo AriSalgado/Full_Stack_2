@@ -16,4 +16,6 @@ Presentacion
 
 
 Informe
-[DSY1104 Evaluación Parcial 1 - ERS.docx](https://github.com/user-attachments/files/22527912/DSY1104.Evaluacion.Parcial.1.-.ERS.docx)
+[DSY1104 Evaluación Parcial 2 - ERS-Especificacion de Requisitos del software 2 (2).pdf](https://github.com/user-attachments/files/23248126/DSY1104.Evaluacion.Parcial.2.-.ERS-Especificacion.de.Requisitos.del.software.2.2.pdf)
+
+
