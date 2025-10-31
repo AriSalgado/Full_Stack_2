@@ -16,13 +16,19 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
+    // DTO interno para evitar que Spring valide toda la entidad
+    public static class LoginRequest {
+        public String email;
+        public String password;
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario credenciales) {
-        Optional<Usuario> usuarioOpt = usuarioService.buscarPorEmail(credenciales.getEmail());
+    public ResponseEntity<?> login(@RequestBody LoginRequest credenciales) {
+        Optional<Usuario> usuarioOpt = usuarioService.buscarPorEmail(credenciales.email);
 
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
-            if (usuario.getPassword().equals(credenciales.getPassword()) && usuario.isActivo()) {
+            if (usuario.getPassword().equals(credenciales.password) && usuario.isActivo()) {
                 return ResponseEntity.ok(usuario);
             } else {
                 return ResponseEntity.status(401).body("Credenciales inválidas o usuario inactivo");

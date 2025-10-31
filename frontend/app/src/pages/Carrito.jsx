@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 
 export default function Carrito() {
-  // --- Estado: lista de productos y total ---
-  const [productos, setProductos] = useState([
-    { id: 1, nombre: "Pantalón Cargo", precio: 24990, cantidad: 1 },
-    { id: 2, nombre: "Polera Oversize", precio: 15990, cantidad: 2 },
-  ]);
+  // --- Cargar productos desde localStorage (si existen) ---
+  const [productos, setProductos] = useState(() => {
+    const carritoGuardado = localStorage.getItem("cart");
+    return carritoGuardado
+      ? JSON.parse(carritoGuardado)
+      : [
+          { id: 1, nombre: "Pantalón Cargo", precio: 24990, cantidad: 1 },
+          { id: 2, nombre: "Polera Oversize", precio: 15990, cantidad: 2 },
+        ];
+  });
+
+  // --- Guardar el carrito cada vez que cambia ---
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(productos));
+  }, [productos]);
 
   // --- Calcular total dinámicamente ---
   const total = productos.reduce(
@@ -16,13 +26,16 @@ export default function Carrito() {
 
   // --- Manejar eliminación de un producto ---
   const eliminarProducto = (id) => {
-    setProductos(productos.filter((p) => p.id !== id));
+    const nuevosProductos = productos.filter((p) => p.id !== id);
+    setProductos(nuevosProductos);
+    localStorage.setItem("cart", JSON.stringify(nuevosProductos)); // también actualiza storage
   };
 
-  // --- Finalizar compra (solo ejemplo) ---
+  // --- Finalizar compra ---
   const finalizarCompra = () => {
     alert("¡Gracias por tu compra!");
-    setProductos([]);
+    setProductos([]); // limpia el estado
+    localStorage.removeItem("cart"); // limpia localStorage
   };
 
   return (
@@ -76,7 +89,7 @@ export default function Carrito() {
         </section>
       </main>
 
-      {/* Footer  */}
+      {/* Footer */}
       <Footer />
     </>
   );
