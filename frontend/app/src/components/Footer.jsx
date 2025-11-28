@@ -9,11 +9,9 @@ export default function Footer() {
             <a href="mailto:tiendaatuestilo@lutiane.cl">contacto@lutiane.cl</a>
           </p>
           <div className="social">
-            <a href="https://www.instagram.com/lutiane.cl">Instagram</a> |{" "}
-            <a href="https://www.mercadolibre.cl/pagina/lutianespa?fbclid=PAZXh0bgNhZW0CMTEAAae3DlcSOW_6KA7sTU2ApElbRgIqYiFfoLD_Rkp2iSeCbNUJpvEmTlxg1LIVfw_aem_59HsN7U2STVkGkw-Eo_uoQ">
-              Mercado Libre
-            </a>{" "}
-            | <a href="#">WhatsApp</a>
+            <a target="_blank" href="https://www.instagram.com/lutiane.cl">Instagram</a> |{" "}
+            <a target="_blank" href="https://www.mercadolibre.cl/pagina/lutianespa?fbclid=PAZXh0bgNhZW0CMTEAAae3DlcSOW_6KA7sTU2ApElbRgIqYiFfoLD_Rkp2iSeCbNUJpvEmTlxg1LIVfw_aem_59HsN7U2STVkGkw-Eo_uoQ">Mercado Libre</a> |{" "}
+            <a href="#">WhatsApp</a>
           </div>
         </div>
 

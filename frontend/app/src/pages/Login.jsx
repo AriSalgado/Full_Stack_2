@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../api";
 import Footer from "../components/Footer";
+import { Navigate, navigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const usuario = await login(email, password);
-      setMensaje(`Bienvenido, ${usuario.nombre} (${usuario.rol})`);
+      return <Navigate to="/pages/Admin.jsx"/> 
       console.log("Usuario autenticado:", usuario);
     } catch (error) {
       setMensaje(error.message);
