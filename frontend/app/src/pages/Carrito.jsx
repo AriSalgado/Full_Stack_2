@@ -11,17 +11,15 @@ import {
 export default function Carrito() {
   const [carrito, setCarrito] = useState(null);
   const [mensaje, setMensaje] = useState("");
-  const [loading, setLoading] = useState(false); // bloquea botones durante acciones
-  const [loadingPage, setLoadingPage] = useState(true); // spinner inicial
+  const [loading, setLoading] = useState(false); 
+  const [loadingPage, setLoadingPage] = useState(true); 
 
-  // Cargar carrito al montar
   useEffect(() => {
     async function cargar() {
       setMensaje("");
       setLoadingPage(true);
       try {
         const data = await getCarrito();
-        // Asegurar estructura mínima
         setCarrito({ items: data?.items ?? [], total: data?.total ?? undefined });
       } catch (error) {
         console.error(error);
@@ -34,14 +32,12 @@ export default function Carrito() {
     cargar();
   }, []);
 
-  // Recalcular total si no llega desde backend
   const total =
     carrito?.items?.reduce(
       (acc, item) => acc + (item.producto?.precio ?? 0) * item.cantidad,
       0
     ) ?? 0;
 
-  // Refrescar carrito desde API
   const refrescarCarrito = async () => {
     try {
       const actualizado = await getCarrito();
@@ -52,13 +48,11 @@ export default function Carrito() {
     }
   };
 
-  // Actualizar cantidad con validaciones
   const handleActualizarCantidad = async (item, nuevaCantidad) => {
     if (loading) return;
     setMensaje("");
     const stock = item.producto?.stock ?? Infinity;
 
-    // Validaciones client-side
     if (nuevaCantidad < 1) {
       setMensaje("La cantidad mínima es 1.");
       return;
@@ -80,7 +74,6 @@ export default function Carrito() {
     }
   };
 
-  // Eliminar ítem del carrito
   const handleEliminar = async (itemId) => {
     if (loading) return;
     setMensaje("");
@@ -96,7 +89,6 @@ export default function Carrito() {
     }
   };
 
-  // Vaciar carrito
   const handleVaciar = async () => {
     if (loading) return;
     setMensaje("");
@@ -112,7 +104,6 @@ export default function Carrito() {
     }
   };
 
-  // Finalizar compra
   const handleFinalizar = async () => {
     if (loading) return;
     setMensaje("");
@@ -129,7 +120,6 @@ export default function Carrito() {
     }
   };
 
-  // Vista de carga inicial
   if (loadingPage) {
     return (
       <div className="container py-5">
@@ -148,7 +138,7 @@ export default function Carrito() {
 
         {mensaje && <div className="alert alert-danger">{mensaje}</div>}
 
-        {/* Listado de ítems */}
+        {}
         <section className="contenedor-carrito mb-5">
           {carrito.items.length === 0 ? (
             <p className="text-center">Tu carrito está vacío 🛒</p>
@@ -243,7 +233,7 @@ export default function Carrito() {
           )}
         </section>
 
-        {/* Resumen */}
+        {}
         <section className="resumen-compra text-center">
           <p className="fs-5">
             Total: <strong>${(carrito.total ?? total).toLocaleString()}</strong>

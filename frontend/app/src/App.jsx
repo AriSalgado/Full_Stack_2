@@ -40,25 +40,9 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/historial"
-          element={
-            <PrivateRoute requiredRole="USER">
-              <Historial />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/boleta/:id"
-          element={
-            <PrivateRoute requiredRole="USER">
-              <Boleta />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/compras"
-          element={
+        <Route path="/historial" element={<Historial />} />
+        <Route path="/boleta/:id" element={<Boleta />} />
+        <Route path="/admin/compras" element={
             <PrivateRoute requiredRole="ADMIN">
               <AdminCompras />
             </PrivateRoute>

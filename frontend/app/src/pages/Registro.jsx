@@ -3,10 +3,10 @@ import { API_URL } from "../api";
 
 export default function Registro() {
   const [form, setForm] = useState({
-    username: "",
-    password: "",
+    nombre: "",
     email: "",
-    nombreCompleto: "",
+    password: "",
+    rol: "CLIENTE"
   });
 
   const [mensaje, setMensaje] = useState("");
@@ -25,10 +25,11 @@ export default function Registro() {
         body: JSON.stringify(form),
       });
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         setMensaje("Registro exitoso. Ahora puedes iniciar sesión.");
       } else {
-        setMensaje("Error al registrar usuario.");
+        const msg = await res.text();
+        setMensaje(msg || "Error al registrar usuario.");
       }
     } catch (error) {
       console.error(error);
@@ -45,7 +46,7 @@ export default function Registro() {
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
         <input
           type="text"
-          name="nombreCompleto"
+          name="nombre"
           placeholder="Nombre completo"
           className="form-control"
           onChange={handleChange}
@@ -56,15 +57,6 @@ export default function Registro() {
           type="email"
           name="email"
           placeholder="Correo"
-          className="form-control"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="username"
-          placeholder="Nombre de usuario"
           className="form-control"
           onChange={handleChange}
           required

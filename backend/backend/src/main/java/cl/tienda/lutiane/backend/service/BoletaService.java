@@ -27,11 +27,9 @@ public class BoletaService {
         for (ItemCarrito item : carrito.getItems()) {
             Producto producto = item.getProducto();
 
-            // Actualizar stock
             producto.setStock(producto.getStock() - item.getCantidad());
             productoRepository.save(producto);
 
-            // Crear detalle
             BoletaDetalle detalle = new BoletaDetalle();
             detalle.setBoleta(boleta);
             detalle.setNombreProducto(producto.getNombre());

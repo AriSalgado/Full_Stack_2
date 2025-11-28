@@ -31,7 +31,7 @@ export default function Admin() {
   const cargarProductos = async () => {
     setLoadingProd(true);
     try {
-      const res = await fetch("http://localhost:8080/api/productos", {
+      const res = await fetch("http://localhost:5173/api/productos", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -52,7 +52,7 @@ export default function Admin() {
   const cargarUsuarios = async () => {
     setLoadingUser(true);
     try {
-      const res = await fetch("http://localhost:8080/api/usuarios", {
+      const res = await fetch("http://localhost:5173/api/usuarios", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -86,7 +86,7 @@ export default function Admin() {
     const stock = parseInt(e.target.stockProd.value);
 
     try {
-      const res = await fetch("http://localhost:8080/api/productos", {
+      const res = await fetch("http://localhost:5173/api/productos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export default function Admin() {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/usuarios", {
+      const res = await fetch("http://localhost:5173/api/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ export default function Admin() {
     const stock = parseInt(e.target.stockProd.value);
 
     try {
-      const res = await fetch(`http://localhost:8080/api/productos/${productoAEditar.id}`, {
+      const res = await fetch(`http://localhost:5173/api/productos/${productoAEditar.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -195,7 +195,7 @@ export default function Admin() {
     const rol = e.target.rolUsuario.value.toUpperCase();
 
     try {
-      const res = await fetch(`http://localhost:8080/api/usuarios/${usuarioAEditar.id}`, {
+      const res = await fetch(`http://localhost:5173/api/usuarios/${usuarioAEditar.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -224,7 +224,7 @@ export default function Admin() {
     setMensajeProd("");
     setLoadingProd(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/productos/${productoAEliminar.id}`, {
+      const res = await fetch(`http://localhost:5173/api/productos/${productoAEliminar.id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -249,7 +249,7 @@ export default function Admin() {
     setMensajeUser("");
     setLoadingUser(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/usuarios/${usuarioAEliminar.id}`, {
+      const res = await fetch(`http://localhost:5173/api/usuarios/${usuarioAEliminar.id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

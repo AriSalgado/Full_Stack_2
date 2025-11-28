@@ -7,7 +7,7 @@ import cl.tienda.lutiane.backend.service.ProductoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos") // <-- actualiza aquí
+@RequestMapping("/api/productos") 
 @CrossOrigin(origins = "*")
 public class ProductoController {
     @Autowired

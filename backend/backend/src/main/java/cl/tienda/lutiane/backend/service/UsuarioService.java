@@ -1,18 +1,23 @@
 package cl.tienda.lutiane.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import cl.tienda.lutiane.backend.model.Usuario;
 import cl.tienda.lutiane.backend.repository.UsuarioRepository;
-import cl.tienda.lutiane.backend.security.PasswordUtils;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository repo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;   
 
     public List<Usuario> listar() {
         return repo.findAll();
@@ -23,6 +28,9 @@ public class UsuarioService {
     }
 
     public Usuario crear(Usuario u) {
+
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
+
         return repo.save(u);
     }
 
@@ -30,7 +38,11 @@ public class UsuarioService {
         return repo.findById(id).map(existente -> {
             existente.setNombre(u.getNombre());
             existente.setEmail(u.getEmail());
-            existente.setPassword(u.getPassword());
+
+            if (u.getPassword() != null && !u.getPassword().isBlank()) {
+                existente.setPassword(passwordEncoder.encode(u.getPassword()));
+            }
+
             existente.setRol(u.getRol());
             existente.setActivo(u.isActivo());
             return repo.save(existente);
@@ -44,17 +56,19 @@ public class UsuarioService {
     public Optional<Usuario> buscarPorEmail(String email) {
         return repo.findByEmail(email);
     }
+
     public Usuario registrarUsuario(String nombre, String email, String plainPassword, String rol) {
+
         if (repo.findByEmail(email).isPresent()) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
-        String hashedPassword = PasswordUtils.hashPassword(plainPassword);
+        String hashedPassword = passwordEncoder.encode(plainPassword);
 
         Usuario u = new Usuario();
         u.setNombre(nombre);
         u.setEmail(email);
-        u.setPassword(hashedPassword);
+        u.setPassword(hashedPassword);  
         u.setRol(rol);
         u.setActivo(true);
 

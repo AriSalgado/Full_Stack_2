@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8080/api";
+export const API_URL = "http://localhost:5173/api";
 
 export function authHeaders() {
   const token = localStorage.getItem("token");
@@ -8,7 +8,6 @@ export function authHeaders() {
   };
 }
 
-// 🔐 Autenticación
 export async function login(email, password) {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
@@ -24,7 +23,7 @@ export async function login(email, password) {
   return response.json();
 }
 
-export async function register(nombre, email, password, rol = "CLIENTE") {
+export async function register(nombre, email, password, rol = "cliente") {
   const response = await fetch(`${API_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -34,8 +33,6 @@ export async function register(nombre, email, password, rol = "CLIENTE") {
   if (!response.ok) throw new Error("Error al registrar usuario");
   return response.json();
 }
-
-// 📦 Productos
 export async function getProductos() {
   const response = await fetch(`${API_URL}/productos`);
   if (!response.ok) throw new Error("Error al obtener productos");
@@ -73,7 +70,6 @@ export async function eliminarProducto(id) {
   if (!response.ok) throw new Error("Error al eliminar producto");
 }
 
-// 👤 Perfil
 export async function getPerfil() {
   const response = await fetch(`${API_URL}/usuarios/perfil`, {
     method: "GET",
@@ -84,7 +80,6 @@ export async function getPerfil() {
   return response.json();
 }
 
-// 🛒 Carrito
 export async function getCarrito() {
   const response = await fetch(`${API_URL}/carrito`, {
     method: "GET",
@@ -106,7 +101,6 @@ export async function addToCarrito(productoId, cantidad = 1) {
   return response.json();
 }
 
-// ✅ Nuevo: actualizar cantidad de un ítem
 export async function updateItemCantidad(itemId, cantidad) {
   const response = await fetch(`${API_URL}/carrito/item/${itemId}`, {
     method: "PUT",
@@ -148,7 +142,6 @@ export async function finalizarCompra() {
   return response.json();
 }
 
-// 📜 Historial y boletas
 export async function getHistorial() {
   const response = await fetch(`${API_URL}/pedidos/mios`, {
     method: "GET",
@@ -169,7 +162,6 @@ export async function getBoleta(id) {
   return response.json();
 }
 
-// 👥 Usuarios (Admin)
 export async function getUsuarios() {
   const response = await fetch(`${API_URL}/admin/usuarios`, {
     method: "GET",
@@ -189,7 +181,6 @@ export async function eliminarUsuario(id) {
   if (!response.ok) throw new Error("Error al eliminar usuario");
 }
 
-// 🛍 Compras (Admin)
 export async function getCompras() {
   const response = await fetch(`${API_URL}/admin/compras`, {
     method: "GET",

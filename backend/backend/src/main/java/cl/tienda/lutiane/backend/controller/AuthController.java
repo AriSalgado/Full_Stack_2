@@ -2,15 +2,18 @@ package cl.tienda.lutiane.backend.controller;
 
 import cl.tienda.lutiane.backend.model.Usuario;
 import cl.tienda.lutiane.backend.service.UsuarioService;
-import cl.tienda.lutiane.backend.security.PasswordUtils;
-import cl.tienda.lutiane.backend.security.JwtUtils; // ✅ util de JWT
+import cl.tienda.lutiane.backend.security.JwtUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -21,7 +24,10 @@ public class AuthController {
     private UsuarioService usuarioService;
 
     @Autowired
-    private JwtUtils jwtUtils; // ✅ inyección correcta
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;   // <-- AHORA SÍ
 
     public static class LoginRequest {
         public String email;
@@ -30,42 +36,53 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest credenciales) {
+
         Optional<Usuario> usuarioOpt = usuarioService.buscarPorEmail(credenciales.email);
 
-        if (usuarioOpt.isPresent()) {
-            Usuario usuario = usuarioOpt.get();
-
-            boolean passwordOk = PasswordUtils.verifyPassword(
-                credenciales.password,
-                usuario.getPassword()
-            );
-
-            if (passwordOk && usuario.isActivo()) {
-                String token = jwtUtils.generateToken(usuario.getEmail(), usuario.getRol());
-
-                Map<String, Object> response = new HashMap<>();
-                response.put("token", token);
-                response.put("email", usuario.getEmail());
-                response.put("nombre", usuario.getNombre());
-                response.put("rol", usuario.getRol());
-
-                return ResponseEntity.ok(response);
-            } else {
-                return ResponseEntity.status(401).body("Credenciales inválidas o usuario inactivo");
-            }
-        } else {
+        if (usuarioOpt.isEmpty()) {
             return ResponseEntity.status(404).body("Usuario no encontrado");
         }
+
+        Usuario usuario = usuarioOpt.get();
+
+        // ✔ VERIFICACIÓN CORRECTA CON BCRYPT
+        boolean passwordOk = passwordEncoder.matches(
+                credenciales.password,
+                usuario.getPassword()
+        );
+
+        if (!passwordOk) {
+            return ResponseEntity.status(401).body("Credenciales inválidas");
+        }
+
+        if (!usuario.isActivo()) {
+            return ResponseEntity.status(401).body("Usuario inactivo");
+        }
+
+        // ✔ GENERAR TOKEN
+        String token = jwtUtils.generateToken(usuario.getEmail(), usuario.getRol());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("email", usuario.getEmail());
+        response.put("nombre", usuario.getNombre());
+        response.put("rol", usuario.getRol());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Usuario usuario) {
-        Usuario nuevo = usuarioService.registrarUsuario(
-            usuario.getNombre(),
-            usuario.getEmail(),
-            usuario.getPassword(),
-            usuario.getRol()
-        );
-        return ResponseEntity.ok(nuevo);
+    public ResponseEntity<?> register(@Valid @RequestBody Usuario usuario) {
+        try {
+            Usuario nuevo = usuarioService.registrarUsuario(
+                    usuario.getNombre(),
+                    usuario.getEmail(),
+                    usuario.getPassword(),  // Aquí adentro el service debe encriptar.
+                    usuario.getRol()
+            );
+            return ResponseEntity.ok(nuevo);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
 }
