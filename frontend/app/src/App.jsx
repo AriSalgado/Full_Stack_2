@@ -10,6 +10,12 @@ import BlogDetail from "./pages/BlogDetail";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Registro from "./pages/Registro";
+import PrivateRoute from "./components/PrivateRoute";
+import Historial from "./pages/Historial";
+import Boleta from "./pages/Boleta";
+import AdminCompras from "./pages/AdminCompras";
+
 
 export default function App() {
   return (
@@ -25,10 +31,41 @@ export default function App() {
         <Route path="/blog-detail" element={<BlogDetail />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute requiredRole="ADMIN">
+              <Admin />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/historial"
+          element={
+            <PrivateRoute requiredRole="USER">
+              <Historial />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/boleta/:id"
+          element={
+            <PrivateRoute requiredRole="USER">
+              <Boleta />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/compras"
+          element={
+            <PrivateRoute requiredRole="ADMIN">
+              <AdminCompras />
+            </PrivateRoute>
+          }
+        />
+
       </Routes>
     </Router>
   );
 }
-
-

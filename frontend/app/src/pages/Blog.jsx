@@ -49,7 +49,7 @@ export default function Blog() {
         </div>
       </main>
 
-      {/* Footer */}
+      {}
       <Footer />
     </>
   );

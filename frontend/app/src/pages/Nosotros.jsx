@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 export default function Nosotros() {
   return (
     <>
-      {/* Hero Section */}
+      {}
       <section
         className="hero d-flex align-items-center justify-content-center text-white text-center"
         style={{
@@ -18,9 +18,9 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* Contenido Principal */}
+      {}
       <main className="nosotros-container container py-5">
-        {/* Nuestra Historia */}
+        {}
         <section className="nosotros-intro mb-5 text-center">
           <h2 className="mb-3">Nuestra Historia</h2>
           <p className="mx-auto" style={{ maxWidth: "800px" }}>
@@ -29,7 +29,7 @@ export default function Nosotros() {
           </p>
         </section>
 
-        {/* Misión y Valores */}
+        {}
         <section className="nosotros-valores text-center mb-5 py-5">
   <h2 className="mb-4 fw-bold">Misión y Valores</h2>
   <div className="row justify-content-center">
@@ -57,7 +57,7 @@ export default function Nosotros() {
 </section>
 
 
-        {/* Botón a Productos */}
+        {}
         <div className="text-center">
           <Link to="/productos" className="btn btn-dark btn-lg">
             Descubre nuestra colección

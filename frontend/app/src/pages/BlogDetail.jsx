@@ -5,7 +5,6 @@ export default function BlogDetail() {
   const [blog, setBlog] = useState(null);
 
   useEffect(() => {
-    // Aquí podrías usar fetch() o axios() para traer datos reales del backend
     const ejemploBlog = {
       titulo: "Tendencias de Moda 2025",
       autor: "Equipo Lutiane",
@@ -35,7 +34,7 @@ export default function BlogDetail() {
         )}
       </main>
 
-      {/* Footer  */}
+      {}
       <Footer />
     </>
   );

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer"; 
 
 export default function Home() {
-  // Productos destacados
   const [productos] = useState([
     {
       id: 1,
@@ -19,7 +18,6 @@ export default function Home() {
     },
   ]);
 
-  // Manejo del carrito (simulado)
   const [carrito, setCarrito] = useState([]);
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
@@ -28,13 +26,13 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero section */}
+      {}
       <section
         className="hero d-flex align-items-center justify-content-center text-center text-white"
         style={{
-          width: "100vw", // ocupa todo el ancho
+          width: "100vw", 
           minHeight: "90vh",
-          marginLeft: "calc(50% - 50vw)", // elimina los márgenes laterales de Bootstrap
+          marginLeft: "calc(50% - 50vw)", 
           background:
             "url('/imagenes/Fondo_Home.jpg') no-repeat center center/cover",
         }}
@@ -48,7 +46,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Productos Destacados */}
+      {}
       <section className="productos container py-5">
         <h2 className="text-center mb-4">Productos Destacados</h2>
         <div className="row justify-content-center">
@@ -88,7 +86,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer*/}
+      {}
       <Footer />
     </>
   );

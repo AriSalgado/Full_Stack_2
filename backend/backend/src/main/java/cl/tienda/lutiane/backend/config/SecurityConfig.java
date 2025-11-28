@@ -11,13 +11,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desactiva protección CSRF
+            .csrf(csrf -> csrf.disable()) 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/auth/**", "/productos/**", "/usuarios/**").permitAll()
                 .anyRequest().permitAll()
             )
-            .formLogin(form -> form.disable()) // Desactiva el login por formulario
-            .httpBasic(basic -> basic.disable()); // Desactiva autenticación básica
+            .formLogin(form -> form.disable()) 
+            .httpBasic(basic -> basic.disable()); 
         return http.build();
     }
 }

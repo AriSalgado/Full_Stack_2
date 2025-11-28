@@ -16,7 +16,6 @@ public class DataLoader {
     CommandLineRunner initDatabase(UsuarioRepository usuarioRepo, ProductoRepository productoRepo) {
         return args -> {
 
-            // Crear usuario administrador si no existe
             if (usuarioRepo.findByEmail("admin@lutiane.cl").isEmpty()) {
                 Usuario admin = new Usuario();
                 admin.setNombre("Administrador");
@@ -31,7 +30,6 @@ public class DataLoader {
                 System.out.println("ℹUsuario administrador ya existe");
             }
 
-            // Crear productos si la tabla está vacía
             if (productoRepo.count() == 0) {
                 Producto p1 = new Producto();
                 p1.setNombre("Pantalón Cargo");

@@ -18,23 +18,20 @@ export default function Productos() {
     },
   ]);
 
-  // --- Función para agregar productos al carrito ---
   const agregarAlCarrito = (producto) => {
-    // Leer carrito actual o crear uno nuevo
+
     const carritoActual = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Verificar si el producto ya existe
     const productoExistente = carritoActual.find((p) => p.id === producto.id);
 
     if (productoExistente) {
-      // Si existe, aumentar la cantidad
+
       productoExistente.cantidad += 1;
     } else {
-      // Si no existe, agregar con cantidad = 1
+
       carritoActual.push({ ...producto, cantidad: 1 });
     }
 
-    // Guardar en localStorage
     localStorage.setItem("cart", JSON.stringify(carritoActual));
     alert(`${producto.nombre} añadido al carrito 🛒`);
   };

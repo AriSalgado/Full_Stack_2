@@ -34,4 +34,8 @@ public class Producto {
     private boolean activo = true;
 
     private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+    public double getPrecio() {
+        return precio;
+    }
 }

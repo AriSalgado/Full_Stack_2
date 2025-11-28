@@ -94,7 +94,7 @@ export default function Contactos() {
         </section>
       </main>
 
-      {/* Footer*/}
+      {}
       <Footer />
     </>
   );

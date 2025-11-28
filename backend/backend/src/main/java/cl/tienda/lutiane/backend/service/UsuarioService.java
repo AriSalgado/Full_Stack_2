@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cl.tienda.lutiane.backend.model.Usuario;
 import cl.tienda.lutiane.backend.repository.UsuarioRepository;
+import cl.tienda.lutiane.backend.security.PasswordUtils;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,22 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> buscarPorEmail(String email) {
-    return repo.findByEmail(email);
+        return repo.findByEmail(email);
     }
+    public Usuario registrarUsuario(String nombre, String email, String plainPassword, String rol) {
+        if (repo.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("El email ya está registrado");
+        }
 
+        String hashedPassword = PasswordUtils.hashPassword(plainPassword);
+
+        Usuario u = new Usuario();
+        u.setNombre(nombre);
+        u.setEmail(email);
+        u.setPassword(hashedPassword);
+        u.setRol(rol);
+        u.setActivo(true);
+
+        return repo.save(u);
+    }
 }

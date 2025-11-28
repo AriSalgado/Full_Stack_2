@@ -5,12 +5,10 @@ import Footer from "../components/Footer";
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
 
-  // Obtener el ID desde la URL (ejemplo: /detalle?id=2)
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
 
-  // Datos simulados (se reemplazarán con backend más adelante)
   const productosEjemplo = [
     {
       id: 1,
@@ -30,7 +28,6 @@ export default function Detalle() {
     },
   ];
 
-  // Buscar el producto correspondiente al ID
   useEffect(() => {
     const encontrado = productosEjemplo.find(
       (item) => item.id === parseInt(id)
@@ -71,7 +68,7 @@ export default function Detalle() {
         </div>
       </main>
 
-      {/* Footer*/}
+      {}
       <Footer />
     </>
   );
