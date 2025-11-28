@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    // ✅ Buscar todos los pedidos de un usuario específico
     List<Pedido> findByUsuarioId(Long usuarioId);
 
-    // ✅ Buscar pedidos por fecha (ejemplo)
+  
     List<Pedido> findByFechaBetween(java.time.LocalDateTime inicio, java.time.LocalDateTime fin);
 }

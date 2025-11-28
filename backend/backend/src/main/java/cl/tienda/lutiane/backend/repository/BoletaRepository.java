@@ -13,7 +13,6 @@ public interface BoletaRepository extends JpaRepository<Boleta, Long> {
 
     Optional<Boleta> findTopByOrderByIdDesc();
 
-    // NUEVO: todas las boletas ordenadas por fecha (para el admin)
     List<Boleta> findAllByOrderByFechaEmisionDesc();
 
     Optional<Boleta> findByNumero(String numero);

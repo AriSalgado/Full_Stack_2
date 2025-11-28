@@ -18,7 +18,6 @@ public class BoletaController {
         this.boletaRepo = boletaRepo;
     }
 
-    // GET /boleta/{id} → detalle de boleta
     @GetMapping("/{id}")
     public ResponseEntity<Boleta> obtener(@PathVariable Long id,
                                           @AuthenticationPrincipal Usuario usuario) {

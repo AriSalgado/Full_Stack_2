@@ -42,7 +42,6 @@ public class Boleta {
     public Boleta() {
     }
 
-    // Helpers de relación bidireccional
     public void addDetalle(BoletaDetalle d) {
         if (d == null) return;
         d.setBoleta(this);
@@ -55,7 +54,6 @@ public class Boleta {
         detalles.remove(d);
     }
 
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

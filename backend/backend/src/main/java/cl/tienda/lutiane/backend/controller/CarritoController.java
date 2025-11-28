@@ -28,14 +28,12 @@ public class CarritoController {
     @Autowired
     private PedidoService pedidoService;
 
-    // ✅ Obtener carrito del usuario
     @GetMapping
     public ResponseEntity<Carrito> obtenerCarrito(@AuthenticationPrincipal Usuario usuario) {
         Carrito carrito = carritoService.obtenerOCrearCarrito(usuario);
         return ResponseEntity.ok(carrito);
     }
 
-    // ✅ Actualizar cantidad de un ítem
     @PutMapping("/item/{itemId}")
     public ResponseEntity<?> actualizarCantidad(
             @PathVariable Long itemId,
@@ -60,7 +58,6 @@ public class CarritoController {
         return ResponseEntity.ok("Cantidad actualizada");
     }
 
-    // ✅ Eliminar ítem del carrito
     @DeleteMapping("/item/{itemId}")
     public ResponseEntity<?> eliminarItem(
             @PathVariable Long itemId,
@@ -77,7 +74,6 @@ public class CarritoController {
         return ResponseEntity.ok("Item eliminado");
     }
 
-    // ✅ Vaciar carrito
     @DeleteMapping("/vaciar")
     public ResponseEntity<?> vaciarCarrito(@AuthenticationPrincipal Usuario usuario) {
         Carrito carrito = carritoService.obtenerOCrearCarrito(usuario);
@@ -86,7 +82,6 @@ public class CarritoController {
         return ResponseEntity.ok("Carrito vaciado");
     }
 
-    // ✅ Finalizar compra → genera pedido y boleta
     @PostMapping("/finalizar")
     public ResponseEntity<Pedido> finalizarCompra(@AuthenticationPrincipal Usuario usuario) {
         Carrito carrito = carritoService.obtenerOCrearCarrito(usuario);

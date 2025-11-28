@@ -143,10 +143,10 @@ insert_data.sql → Inserta los datos iniciales (usuarios y productos de prueba)
 🧾 Documentación y Presentación
 
 📘 Informe Final:
-👉 [Agrega aquí el enlace de tu informe en Google Docs o PDF]
+👉 []
 
 📊 Presentación PPT:
-👉 [Agrega aquí el enlace de tu presentación en PowerPoint o Google Slides]
+👉 []
 
 🧱 Estructura del Proyecto
 Full_Stack_2-2/

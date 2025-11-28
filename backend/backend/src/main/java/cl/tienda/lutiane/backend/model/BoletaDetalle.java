@@ -12,7 +12,7 @@ public class BoletaDetalle {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "boleta_id", nullable = false)
-    @JsonBackReference // evita recursión al serializar (lado "hijo")
+    @JsonBackReference 
     private Boleta boleta;
 
     @Column(nullable = false)
@@ -30,7 +30,6 @@ public class BoletaDetalle {
     public BoletaDetalle() {
     }
 
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

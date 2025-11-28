@@ -51,7 +51,6 @@ public class CheckoutService {
                 throw new RuntimeException("Stock insuficiente para " + producto.getNombre());
             }
 
-            // Descontar stock
             producto.setStock(producto.getStock() - cantidad);
             productoRepo.save(producto);
 
@@ -66,7 +65,7 @@ public class CheckoutService {
             boleta.addDetalle(detalle);
         }
 
-        double iva = subtotal * 0.19; // IVA Chile
+        double iva = subtotal * 0.19;
         double total = subtotal + iva;
 
         boleta.setSubtotal(subtotal);
@@ -75,14 +74,12 @@ public class CheckoutService {
 
         Boleta saved = boletaRepo.save(boleta);
 
-        // Vaciar carrito
         carrito.getItems().clear();
         carritoRepo.save(carrito);
 
         return saved;
     }
 
-    // Correlativo simple; puedes usar secuencias/tabla específica si necesitas estricto
     private String generarNumeroCorrelativo() {
         return UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }

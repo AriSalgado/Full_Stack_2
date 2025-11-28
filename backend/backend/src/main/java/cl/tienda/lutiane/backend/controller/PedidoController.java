@@ -43,7 +43,6 @@ public class PedidoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // NUEVO: listado completo para el panel admin
     @GetMapping("/todas")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Boleta>> todas() {

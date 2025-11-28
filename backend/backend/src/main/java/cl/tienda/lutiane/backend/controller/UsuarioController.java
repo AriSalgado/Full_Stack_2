@@ -7,7 +7,7 @@ import cl.tienda.lutiane.backend.service.UsuarioService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios") // <-- actualiza aquí
+@RequestMapping("/api/usuarios") 
 @CrossOrigin(origins = "*")
 public class UsuarioController {
     @Autowired
