@@ -40,7 +40,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> buscarPorEmail(String email) {
-    return repo.findByEmail(email);
+        return repo.findByEmail(email);
     }
 
 }

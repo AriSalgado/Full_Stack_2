@@ -19,11 +19,19 @@ export default function Home() {
     },
   ]);
 
-  // Manejo del carrito (simulado)
-  const [carrito, setCarrito] = useState([]);
+  // Añadir al carrito (persistido en localStorage, compatible con otras páginas)
   const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
-    alert(`${producto.nombre} añadido al carrito 🛍️`);
+    const carritoActual = JSON.parse(localStorage.getItem("cart")) || [];
+    const productoExistente = carritoActual.find((p) => p.id === producto.id);
+    if (productoExistente) {
+      productoExistente.cantidad += 1;
+    } else {
+      carritoActual.push({ ...producto, cantidad: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(carritoActual));
+    // emitir evento para que otros componentes (ej. Navbar) puedan reaccionar
+    window.dispatchEvent(new CustomEvent("cart-updated", { detail: carritoActual }));
+    alert(`${producto.nombre} añadido al carrito �`);
   };
 
   return (
@@ -59,7 +67,7 @@ export default function Home() {
             >
               <div className="card p-3 shadow-sm">
                 <img
-                  src={producto.imagen}
+                  src={producto.imagen && (producto.imagen.startsWith("http") ? producto.imagen : window.location.origin + producto.imagen)}
                   alt={producto.nombre}
                   className="img-fluid mb-3"
                   style={{ height: "250px", objectFit: "cover" }}

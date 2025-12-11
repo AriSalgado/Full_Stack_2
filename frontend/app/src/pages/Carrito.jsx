@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export default function Carrito() {
@@ -25,23 +26,42 @@ export default function Carrito() {
   );
 
   // --- Manejar eliminación de un producto ---
+  // --- Manejar eliminación de un producto (de a uno) ---
   const eliminarProducto = (id) => {
-    const nuevosProductos = productos.filter((p) => p.id !== id);
+    const nuevosProductos = productos.map((p) => ({ ...p }));
+    const idx = nuevosProductos.findIndex((p) => p.id === id);
+    if (idx === -1) return;
+    if (nuevosProductos[idx].cantidad > 1) {
+      nuevosProductos[idx].cantidad -= 1;
+    } else {
+      nuevosProductos.splice(idx, 1);
+    }
     setProductos(nuevosProductos);
     localStorage.setItem("cart", JSON.stringify(nuevosProductos)); // también actualiza storage
   };
 
+  // --- Manejar aumento de cantidad de un producto ---
+  const aumentarCantidad = (id) => {
+    const nuevosProductos = productos.map((p) => ({ ...p }));
+    const idx = nuevosProductos.findIndex((p) => p.id === id);
+    if (idx === -1) return;
+    nuevosProductos[idx].cantidad += 1;
+    setProductos(nuevosProductos);
+    localStorage.setItem("cart", JSON.stringify(nuevosProductos));
+  };
+
   // --- Finalizar compra ---
   const finalizarCompra = () => {
-    alert("¡Gracias por tu compra!");
-    setProductos([]); // limpia el estado
-    localStorage.removeItem("cart"); // limpia localStorage
+    // redirigir a checkout para completar datos y pago
+    navigate("/checkout");
   };
+  const navigate = useNavigate();
 
   return (
     <>
       <main className="carrito-page container py-5">
         <h1 className="text-center mb-4">Carrito de Compras</h1>
+        <p className="text-center">Total prendas: {productos.reduce((s, p) => s + p.cantidad, 0)}</p>
 
         {/* Lista de productos */}
         <section className="contenedor-carrito mb-5">
@@ -60,12 +80,31 @@ export default function Carrito() {
                       ${prod.precio.toLocaleString()} x {prod.cantidad}
                     </p>
                   </div>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={() => eliminarProducto(prod.id)}
-                  >
-                    Eliminar
-                  </button>
+                  <div className="d-flex gap-2">
+                    <button
+                      className="btn btn-outline-secondary"
+                      onClick={() => eliminarProducto(prod.id)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="btn btn-outline-secondary"
+                      onClick={() => aumentarCantidad(prod.id)}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="btn btn-outline-danger"
+                      onClick={() => {
+                        // eliminar completamente
+                        const restantes = productos.filter((p) => p.id !== prod.id);
+                        setProductos(restantes);
+                        localStorage.setItem("cart", JSON.stringify(restantes));
+                      }}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

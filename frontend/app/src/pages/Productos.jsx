@@ -1,22 +1,28 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
+import { getProductos } from "../api.js";
 
 export default function Productos() {
-  const [productos] = useState([
-    {
-      id: 1,
-      nombre: "Polera Oversize",
-      precio: 15000,
-      imagen: "/imagenes/polera.png",
-    },
-    {
-      id: 2,
-      nombre: "Pantalón Cargo",
-      precio: 25000,
-      imagen: "/imagenes/Cargo_Jeans.jpg",
-    },
-  ]);
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const list = await getProductos();
+        // Si viene ?categoria= en la URL, filtrar
+        const params = new URLSearchParams(window.location.search);
+        const cat = params.get("categoria");
+        if (cat) {
+          setProductos(list.filter((p) => (p.categoria || "Sin categoría") === cat));
+        } else {
+          setProductos(list);
+        }
+      } catch (err) {
+        console.error("Error cargando productos:", err);
+      }
+    })();
+  }, []);
 
   // --- Función para agregar productos al carrito ---
   const agregarAlCarrito = (producto) => {
@@ -43,7 +49,10 @@ export default function Productos() {
     <>
       <main className="productos-page container py-5">
         <h1 className="text-center mb-5">Nuestros Productos</h1>
-
+        {/* Si la URL contiene categoria, mostramos un encabezado pequeño */}
+        {new URLSearchParams(window.location.search).get("categoria") && (
+          <p className="text-center">Mostrando categoría: <strong>{new URLSearchParams(window.location.search).get("categoria")}</strong></p>
+        )}
         <section className="row justify-content-center productos-galeria">
           {productos.map((producto) => (
             <div
@@ -53,7 +62,7 @@ export default function Productos() {
               <div className="card p-3 shadow-sm h-100">
                 <figure>
                   <img
-                    src={producto.imagen}
+                    src={producto.imagen && (producto.imagen.startsWith("http") ? producto.imagen : window.location.origin + producto.imagen)}
                     alt={producto.nombre}
                     className="img-fluid mb-3 rounded"
                     style={{ height: "250px", objectFit: "cover" }}

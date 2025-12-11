@@ -27,6 +27,12 @@ export default function Navbar() {
             <Link className="nav-link text-light" to="/productos">Productos</Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link text-light" to="/categorias">Categorías</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/ofertas">Ofertas</Link>
+          </li>
+          <li className="nav-item">
             <Link className="nav-link text-light" to="/nosotros">Nosotros</Link>
           </li>
           <li className="nav-item">
@@ -40,6 +46,9 @@ export default function Navbar() {
           </li>
           <li className="nav-item">
             <Link className="nav-link text-light" to="/carrito">Carrito 🛒</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/checkout">Checkout</Link>
           </li>
         </ul>
       </div>

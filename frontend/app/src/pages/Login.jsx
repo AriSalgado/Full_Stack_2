@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api";
 import Footer from "../components/Footer";
 
@@ -6,13 +7,24 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const usuario = await login(email, password);
       setMensaje(`Bienvenido, ${usuario.nombre} (${usuario.rol})`);
+      // Guardar usuario en localStorage para autocompletar checkout
+      try {
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+      } catch (err) {
+        console.warn("No se pudo guardar usuario en localStorage", err);
+      }
       console.log("Usuario autenticado:", usuario);
+      // redirigir si es admin
+      if (usuario && (usuario.rol === "admin" || usuario.email === "admin@lutiane.cl" || usuario.email === "admin.lu.gmail.com")) {
+        navigate("/admin");
+      }
     } catch (error) {
       setMensaje(error.message);
     }

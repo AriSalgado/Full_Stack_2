@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
+import { getProductoById } from "../api.js";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
@@ -32,10 +33,21 @@ export default function Detalle() {
 
   // Buscar el producto correspondiente al ID
   useEffect(() => {
-    const encontrado = productosEjemplo.find(
-      (item) => item.id === parseInt(id)
-    );
-    setProducto(encontrado);
+    if (!id) {
+      setProducto(null);
+      return;
+    }
+
+    (async () => {
+      try {
+        const prod = await getProductoById(id);
+        setProducto(prod);
+      } catch (err) {
+        console.warn("No se pudo cargar producto desde backend, usando ejemplo:", err);
+        const encontrado = productosEjemplo.find((item) => item.id === parseInt(id));
+        setProducto(encontrado);
+      }
+    })();
   }, [id]);
 
   if (!producto) {
@@ -55,7 +67,7 @@ export default function Detalle() {
         <div className="row align-items-center">
           <div className="col-md-6 text-center">
             <img
-              src={producto.imagen}
+              src={producto.imagen && (producto.imagen.startsWith("http") ? producto.imagen : window.location.origin + producto.imagen)}
               alt={producto.nombre}
               className="img-fluid rounded shadow-sm"
             />
@@ -66,7 +78,22 @@ export default function Detalle() {
               ${producto.precio.toLocaleString()}
             </p>
             <p className="mb-4">{producto.descripcion}</p>
-            <button className="btn btn-dark">Agregar al carrito 🛒</button>
+            <button className="btn btn-dark" onClick={() => {
+              // Agregar al carrito en localStorage
+              const carritoActual = JSON.parse(localStorage.getItem("cart")) || [];
+              const productoEnCarrito = carritoActual.find((p) => p.id === producto.id);
+              if (productoEnCarrito) {
+                productoEnCarrito.cantidad += 1;
+              } else {
+                carritoActual.push({ ...producto, cantidad: 1 });
+              }
+              localStorage.setItem("cart", JSON.stringify(carritoActual));
+              // Actualizar indicador visual (opcional): emitir evento personalizado
+              window.dispatchEvent(new CustomEvent('cart-updated', { detail: carritoActual }));
+              alert(`${producto.nombre} añadido al carrito 🛒`);
+            }}>
+              Agregar al carrito 🛒
+            </button>
           </div>
         </div>
       </main>

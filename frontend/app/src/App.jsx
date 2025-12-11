@@ -10,6 +10,11 @@ import BlogDetail from "./pages/BlogDetail";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Categorias from "./pages/Categorias";
+import Checkout from "./pages/Checkout";
+import CompraExitosa from "./pages/CompraExitosa";
+import CompraFallida from "./pages/CompraFallida";
+import Ofertas from "./pages/Ofertas";
 
 export default function App() {
   return (
@@ -26,6 +31,12 @@ export default function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/categorias" element={<Categorias />} />
+        <Route path="/categorias/:categoria" element={<Productos />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/compra-exitosa" element={<CompraExitosa />} />
+        <Route path="/compra-fallida" element={<CompraFallida />} />
+        <Route path="/ofertas" element={<Ofertas />} />
       </Routes>
     </Router>
   );

@@ -53,19 +53,11 @@ public class DataLoader {
                 p2.setActivo(true);
                 p2.setFechaCreacion(LocalDateTime.now());
 
-                Producto p3 = new Producto();
-                p3.setNombre("Chaqueta Denim");
-                p3.setDescripcion("Chaqueta clásica de mezclilla con corte moderno.");
-                p3.setPrecio(34990.0);
-                p3.setStock(15);
-                p3.setCategoria("Chaquetas");
-                p3.setImagen("/imagenes/denim.png");
-                p3.setActivo(true);
-                p3.setFechaCreacion(LocalDateTime.now());
+             
 
                 productoRepo.save(p1);
                 productoRepo.save(p2);
-                productoRepo.save(p3);
+                
 
                 System.out.println("Productos iniciales cargados en la base de datos");
             } else {
